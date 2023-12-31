@@ -1,19 +1,39 @@
 import { useState } from "react";
 
 function Dashboard() {
-  const [active, setActive] = useState(false);
+  const [activeSide, setActiveSide] = useState(false);
   return (
-    <div className="flex">
-      <div
-        className={`h-screen bg-indigo-500 w-1/5  relative min-w-72 max-w-96 ${
-          active ? "" : "max-[900px]:hidden"
-        } `}
+    <div className="flex relative">
+      {/* sidebar */}
+      <nav
+        className={`absolute left-0 top-0 w-10/12 bg-indigo-500 h-screen transform transition-transform duration-300 lg:relative lg:w-1/5 lg:translate-x-0 lg:min-w-72 lg:max-w-96 ${
+          activeSide ? "translate-x-0" : "-translate-x-full"
+        }`}
       >
         <img
           className="mx-auto h-20 w-auto absolute top-0 left-4 "
           src="/dashboardLogo.svg"
           alt="Your Company"
         />
+
+        {/* close menu  */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="w-8 h-8 absolute right-4 top-4 text-white lg:hidden"
+          onClick={() => setActiveSide(false)}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+          />
+        </svg>
+
+        {/* links  */}
         <div className="w-10/12 pt-24 mx-auto ">
           <div className="flex hover:bg-indigo-700 cursor-pointer p-2 rounded-xl">
             <svg
@@ -131,18 +151,19 @@ function Dashboard() {
             <p className="text-white pl-2 font-bold">Sittings</p>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* main area  */}
-      <div className="h-screen w-4/5">
+      {/* main page */}
+      <main className="w-full h-screen">
+        {/* open menu  */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
           strokeWidth={1.5}
           stroke="currentColor"
-          className="w-6 h-6 cursor-pointer min-[900px]:hidden"
-          onClick={() => setActive(true)}
+          className="w-6 h-6 cursor-pointer absolute right-4 top-4 lg:hidden"
+          onClick={() => setActiveSide(!activeSide)}
         >
           <path
             strokeLinecap="round"
@@ -150,7 +171,7 @@ function Dashboard() {
             d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
           />
         </svg>
-      </div>
+      </main>
     </div>
   );
 }

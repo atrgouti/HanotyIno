@@ -1,0 +1,7 @@
+@media screen and (max-width: 900px) {
+  h1 {
+    position: absolute;
+    color: green;
+    padding: 20px;
+  }
+}
